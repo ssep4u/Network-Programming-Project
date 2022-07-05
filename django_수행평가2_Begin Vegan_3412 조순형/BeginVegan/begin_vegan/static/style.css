@@ -1,0 +1,243 @@
+.nav_container {
+    display: flex;
+    justify-content: space-between;
+    padding: 40px;
+    align-items: center;
+}
+
+.menu {
+    flex-grow: 2;
+    margin-left: 150px;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+.board_menu {
+    margin-right: 100px;
+}
+
+.login_input_con {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    border: solid;
+    margin: 0px 400px;
+}
+
+.login_input_item {
+    margin: 20px 100px;
+}
+
+.login_input {
+    border-color: black;
+    font-weight: bold;
+    width: 300px;
+    height: 40px;
+    font-size: 1.0rem;
+}
+
+.login_signup_btn {
+    margin: 50px 200px;
+    padding: 8px 25px;
+    font-weight: bold;
+    font-size: 1.1rem;
+    color: white;
+    background-color: #00DD73;
+}
+
+.login_logout_menu {
+    margin-left: 200px;
+}
+
+.login_fail {
+    font-weight: bold;
+    font-size: 1.2rem;
+    border: solid;
+    border-color: #00DD73;
+    padding: 5px 20px;
+}
+
+.login_fail:hover {
+    color: white;
+    background-color: #00DD73;
+}
+
+.register_menu {
+    margin-left: 60px;
+}
+
+.post_list_container {
+    display: flex;
+    justify-content: space-between;
+    margin: 40px;
+    margin-top: 60px;
+    margin-bottom: 60px;
+    padding: 30px;
+    width: 1365px;
+    height: 45px;
+    border-radius: 10px;
+    font-weight: bold;
+    font-size: 1.2rem;
+    /*box-shadow: 0px 0px 15px 10px #f2f2f2;*/
+    border: solid;
+    /*border-color: #00DD73;*/
+    align-items: center;
+}
+
+.post_list_div {
+    display: flex;
+    align-items: center;
+}
+
+.post_date {
+    display: inline;
+    text-align: right;
+    margin-right: 100px;
+}
+
+.post_create_container {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-wrap: wrap;
+    margin: 80px 250px 100px 280px;
+}
+
+.post_delete_con {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    border: solid;
+    margin: 150px 500px;
+    padding: 50px;
+}
+
+select {
+    background: url(./assets/check_box_arraw_icon.png) no-repeat 98% 50%;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    cursor: pointer;
+}
+
+.input_box {
+    display: inline-block;
+    font-size: 1.1rem;
+    width: 800px;
+    padding: 8px;
+    border: solid;
+    font-family: "Arial Rounded MT Bold";
+}
+
+.file {
+    border: solid;
+    border-color: #00DD73;
+    padding: 3px 10px;
+    font-size: 1.2rem;
+    font-weight: bold
+}
+
+.comment_box {
+    border-color: black;
+    width: 800px;
+    height: 200px;
+    padding: 10px;
+    margin: 10px 200px;
+    font-size: 1.0rem;
+    font-family: "Arial Rounded MT Bold";
+}
+
+.index_container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-align: right;
+    margin-right: 40px;
+    letter-spacing: 0.05em;
+    line-height: 40px;
+}
+
+.index_item {
+    margin-bottom: 90px;
+}
+
+.graphic {
+    margin-top: 80px;
+    height: 496px;
+}
+
+.start {
+    border: solid;
+    border-color: #00DD73;
+    background-color: white;
+    border-radius: 40px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    padding: 15px 25px 15px 25px;
+    margin-top: 30px;
+    letter-spacing: 0.1em
+}
+
+.start:hover {
+    background-color: #00DD73;
+    color: white;
+    cursor: pointer;
+    transition: 0.1s;
+}
+
+green {
+    color: #00DD73;
+}
+
+ul {
+    list-style: none;
+    display: flex;
+    justify-content: flex-start;
+}
+
+li {
+    margin-right: 50px;
+    font-weight: bold;
+    font-size: 1.4rem;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+.label {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-right: 100px;
+}
+
+.logo {
+    height: 30px;
+    flex-grow: 1;
+}
+
+.basic_icon {
+    height: 35px;
+}
+
+.user_icon {
+    height: 40px;
+    margin-left: 50px;
+}
+
+.delete_icon {
+    height: 35px;
+    margin-left: 30px;
+}
+
+button {
+    outline: none;
+    background: none;
+    border: none;
+}
+
+button:hover {
+    cursor: pointer;
+}

@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %}글 수정{% endblock %}
+
+{% block content %}
+    {%  load staticfiles %}
+    {%  load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'polls/formedit.css' %}">
+    <a href="{% url 'board:repository_list' %} "><img src="{% static 'img/back.png' %}"></a>
+    <form action="" method="post">
+        {% csrf_token %}
+        <p>글 수정하기<p>
+        <hr>
+        {{ form.as_p }}
+        <button type="submit" class="button button1">저장</button>
+        <button type="button" onclick="history.back();" class="button button1">취소</button>
+
+    </form>
+{% endblock %}

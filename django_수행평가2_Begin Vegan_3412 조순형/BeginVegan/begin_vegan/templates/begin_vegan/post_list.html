@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block title %}List Post{% endblock %}
+
+{% block content %}
+{% include 'begin_vegan/category.html' %}
+
+{% load begin_vegan_filters %}
+
+{% for post in post_list %}
+<a href="{% url 'begin_vegan:post_detail' pk=post.pk %}">
+<div class="post_list_container">
+    <span class="post_title">{{ post }}</span>
+    <div class="post_list_div">
+        <span class="post_date">{{ post.date|date:'y/m/d h:i' }}</span>
+        {% if user.username|stringformat:"s" == post.user|trim|stringformat:"s" %}
+            <a href="{% url 'begin_vegan:post_update' pk=post.pk %}"><img class="basic_icon" src="/static/assets/modify_icon.png" alt="수정"></a></td>
+            <a href="{% url 'begin_vegan:post_delete' pk=post.pk %}"><img class="delete_icon" src="/static/assets/delete_icon.png" alt="삭제"></a></td>
+        {% else %}
+            <span style="margin-right: 100px;"></span>
+        {% endif %}
+    </div>
+</div>
+</a>
+{% endfor %}
+
+{% endblock %}

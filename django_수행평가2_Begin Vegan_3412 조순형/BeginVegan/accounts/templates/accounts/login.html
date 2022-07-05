@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+<a href="{% url 'begin_vegan:index' %}">
+    <img style="width: 50px; margin: 50px 200px 20px 200px" src="/static/assets/back_icon.png/" alt="뒤로가기">
+</a>
+<form style="display: flex; align-items: center; justify-content: center;" action="" method="post">
+    {% csrf_token %}
+    <div class="login_input_con">
+        <span style="font-size:1.5rem ; font-weight: bold; padding: 50px 100px">LOGIN</span>
+        <div class="login_input_item">
+            <span style="font-size: 1.2rem; font-weight: bold; margin-right: 100px">닉네임</span>
+            <input class="login_input" type="text" name="username" placeholder=" 닉네임">
+        </div>
+        <div class="login_input_item">
+            <span style="font-size: 1.2rem; font-weight: bold; margin-right: 85px">패스워드</span>
+            <input class="login_input" type="password" name="password" placeholder=" 패스워드">
+        </div>
+        <button class="login_signup_btn">로그인</button>
+    </div>
+</form>
+{% endblock %}

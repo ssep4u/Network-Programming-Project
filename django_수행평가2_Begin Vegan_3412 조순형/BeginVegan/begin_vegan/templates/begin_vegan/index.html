@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %}BEGINVEGAN{% endblock %}
+
+{% block content %}
+
+{% include 'begin_vegan/header.html' %}
+
+<div class="index_container">
+    <img class="graphic" src="/static/assets/graphic.png" alt="graphic">
+    <div class="index_item">
+        <h1>Why Go Vegan?</h1>
+        <h2>For <green>Health!</green> For <green>Environment!</green> For <green>Animal!</green></h2>
+        <h2 style="letter-spacing: 0em">Begin Vegan을 통해 채식을<br>함께하는 시간이 되기를 바랍니다 😉👍🏻</h2>
+        <button class="start" onclick="location.href='/category/post/list'">시작하기</button>
+    </div>
+</div>
+
+{% endblock %}

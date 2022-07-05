@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block title %}Update Post{% endblock %}
+
+{% block content %}
+<form class="post_create_container" action="" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.user.as_hidden }}
+    <p>
+        <label style="margin-right: 62px" class="label" for="id_category">카테고리</label>
+        <select class="input_box" style="width: 250px; border-color: black; margin-right: 400px"
+                name="category"
+                id="id_category">
+            <option class="option" value="전체">전체</option>
+            <option value="비건">비건</option>
+            <option value="락토-오보">락토-오보</option>
+            <option value="페스코">페스코</option>
+            <option value="폴로">폴로</option>
+            <option value="플렉시테리언">플렉시테리언</option>
+        </select>
+    </p>
+
+    <p>
+        <label class="label">제목</label>
+        <input class="input_box" type="text" name="title" value="{{ post.title }}" required id="id_title" placeholder="제목을 입력해주세요.">
+    </p>
+
+    <p>
+        <label class="label">내용</label>
+        <input class="input_box" style="height: 200px;" type="text" name="content" value="{{ post.content }}" required
+                  id="id_content" placeholder="내용을 입력해주세요.">
+    </p>
+
+    <p>
+        <span class="label">사진</span>
+        <span style="font-weight: bold; font-size: 1.0rem; margin-right: 20px">{{ post.photo }}</span>
+        <input style="font-weight: bold; font-size: 1.0rem" type="file" name="photo" value={{ post.photo }} accept="image/*" id="id_photo">
+
+        <div style="margin-left: 250px;">
+            <button type="button" onclick="history.back();">
+                <img style="padding: 10px; width: 50px; height: 50px"
+                     src="/static/assets/cancel_icon.png" alt="취소">
+            </button>
+            <button type="submit">
+                <img style="padding: 10px; width: 50px; height: 50px" src="/static/assets/add_submit_icon.png"
+                     alt="추가">
+            </button>
+        </div>
+    </p>
+</form>
+{% endblock %}

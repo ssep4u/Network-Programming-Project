@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %}Login Fail{% endblock %}
+
+{% block content %}
+<form action="" method="post">
+    {% csrf_token %}
+    <div class="post_delete_con">
+        <div>
+            <a class="login_fail" href="{% url 'accounts:login' %}">로그인</a>
+            <a class="login_fail" href="{% url 'accounts:register' %}">회원가입</a>
+        </div>
+    </div>
+</form>
+
+{% endblock %}

@@ -1,0 +1,129 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}상세보기{% endblock %}
+{% block extrahead %}
+    <link rel="stylesheet" href="{% static 'css/board_detail.css' %}">
+    <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"
+    />
+{% endblock %}
+
+{% block content %}
+    {% if messages %}
+        <div class="alert alert-danger my-3" role="alert">
+            {% for message in messages %}
+                <strong>{{ message.tags }}</strong>
+                <ul>
+                    <li>{{ message.message }}</li>
+                </ul>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    <div class="detail-con">
+        <div class="header">
+            <div class="user-info">
+                <img {% if board.profile.image %} src="{{ board.profile.image.url }}"
+                                                   {% else %}src="https://i.stack.imgur.com/34AD2.jpg"{% endif %}
+                                                   class="user-img" alt="">
+                <div class="user-more-info">
+                    <h1>{{ board.profile.nickname }}</h1>
+                    <h6>{{ board.created_date }}</h6>
+                </div>
+            </div>
+            <div class="board-info">
+                <div class="comments">
+                    <span>댓글</span>
+                    <h3>{{ board.comment_set.all.count }}</h3>
+                </div>
+                <div class="applications">
+                    <span>신청수</span>
+                    <h3>{{ board.application_set.all.count }}</h3>
+                </div>
+            </div>
+        </div>
+        <div class="detail-content">
+            <div class="import-info">
+                <h1>{{ board.title }}</h1>
+                <div class="btn-group">
+                    {% if board.profile.user != request.user %}
+                        {% if application_list.count == 0 %}
+                            <a href="{% url 'daham:application_create' board.id %}">
+                                <button>신청하기</button>
+                            </a>
+                        {% else %}
+                            {% for application in application_list.all %}
+                                <a href="{% url 'daham:application_delete' application.id %}">
+                                    <button>신청취소</button>
+                                </a>
+                            {% endfor %}
+                        {% endif %}
+                    {% else %}
+                    {% endif %}
+
+                    {% if request.user == board.profile.user %}
+                        <a href="{% url 'daham:board_update' board.id %}">
+                            <button><i class="fas fa-pencil-alt"></i></button>
+                        </a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <a href="#" class="delete" data-uri="{% url 'daham:board_delete' board.id %}">
+                            <button style="color:red;"><i class="far fa-trash-alt"></i></button>
+                        </a>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="contents">
+                <div class="end_date">
+                    <h3>봉사일</h3>
+                    <h5>{{ board.end_date }}</h5>
+                </div>
+                <h4>{{ board.content }}</h4>
+                {% if board.image %}
+                    <img src="{{ board.image.url }}" class="board-img" alt="">
+                {% endif %}
+            </div>
+        </div>
+        <div class="comment-con">
+
+            {% for comment in board.comment_set.all %}
+                <div class="comment-info">
+                    <div class="info one">
+                        <div class="one-one">
+                            <h5>{{ comment.profile.nickname }}</h5>
+                            <h6>{{ comment.created_date|date:'Y-m-d' }}</h6>
+                        </div>
+                    </div>
+                    <div class="info second">
+                        <h5>{{ comment.content }}</h5>
+                        {% if request.user == comment.profile.user %}
+                            <a href="#" class="delete" data-uri="{% url 'daham:comment_delete' comment.id %}">
+                                <button class="btn-com"><i class="far fa-trash-alt"></i></button>
+                            </a>
+                        {% endif %}
+                    </div>
+                </div>
+            {% endfor %}
+
+            <form action="{% url 'daham:comment_create' board.id %}" method="post">
+                {% csrf_token %}
+                <input {% if not user.is_authenticated %}disabled{% endif %} name="content" class="in-com"
+                       placeholder="댓글을 입력해주세요" autocomplete="off" id="content">
+                <button type="submit" class="submit"><img src="{% static 'img/send.png' %}" alt=""/></button>
+            </form>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block script %}
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".delete").on('click', function () {
+                if (confirm("정말 삭제하시겠습니까?")) {
+                    location.href = $(this).data('uri');
+                }
+            });
+        });
+    </script>
+{% endblock %}

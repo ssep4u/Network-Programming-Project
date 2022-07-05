@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block title %}그린하우스 게시판{% endblock %}
+
+{% block content %}
+    {%  load staticfiles %}
+    {%  load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'polls/intro_detail.css' %}">
+
+    <a href="{% url 'board:repository_list' %} "><img src="{% static 'img/logo.png'%}" style="width: 200px; margin-bottom: 30px; margin-top: 30px"></a>
+    <br>
+    <p class="a">{{ repository.description }}</p>
+    <p class="at">그린하우스에 글을 쓰고 싶으시다면 물방울을 CLICK 해주세요!
+    <a href="{% url 'board:introduction_add' repository_pk=repository.pk %} "><i class="bi bi-droplet fa-4x"></i></a></p>
+    <table class="type09">
+        <thead>
+        <tr>
+            <th scope="cols">글 번호 </th>
+            <th scope="cols">제목</th>
+            <th scope="cols">작성자</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for introduction in repository.introduction_set.all %}
+            <tr>
+                {#   <td><a href="#}{#  url 'board:introduction_modify' repository_pk=repository.pk pk=introduction.pk #} {#  "><i class="btn bi-success">수정</i></a></td>  #}
+                <td>{{ introduction.number}}</td>
+                <td>  <a href="{% url 'board:introduction_detail' repository_pk=repository.pk pk=introduction.pk %}" style="color: #124b12">{{ introduction.title }}</a> ({{introduction.comment_set.all.count}})</td>
+                <td>{{ introduction.writer}}</td>
+                {#  <td><a href="#}{#  url 'board:introduction_delete' repository_pk=repository.pk pk=introduction.pk #} {#"><i class="bi bi-trash"></i></a></td> #}
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

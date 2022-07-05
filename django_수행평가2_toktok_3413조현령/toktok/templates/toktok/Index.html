@@ -1,0 +1,29 @@
+{% load static %}
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+<title>Index page</title>
+</head>
+<body>
+    <nav class="navbar navbar-expand-xl navbar-light bg-light border-bottom">
+        <a class="navbar-brand" href="{% url 'toktok:index' %}"><h2><b>TOKTOK</b></h2></a>
+            <img src="{% static 'logo.png' %}" style="width: 10px; margin-left: 7px;">
+
+         <button class="navbar-toggler ml-auto" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    </nav>
+
+    <img src="{%static 'main.png' %}" usemap="#layermap" alt="map">
+
+    <map name="layermap">
+         <area shape="rect" coords="679,469,883,697" alt="map" href="{% url 'toktok:repository_list' %}">
+    </map>
+
+
+</body>
+</html>

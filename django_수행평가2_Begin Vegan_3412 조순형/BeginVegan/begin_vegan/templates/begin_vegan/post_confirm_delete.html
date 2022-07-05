@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title %}Confirm Delete Post{% endblock %}
+
+{% block content %}
+<form action="" method="post">
+    {% csrf_token %}
+    <div class="post_delete_con">
+        <div style="padding: 0px 40px; text-align: center">
+            <h2>"{{ post }}"</h2>
+            <h2>를 삭제하시겠습니까?</h2>
+        </div>
+        <div style="padding: 10px">
+            <button type="button" onclick="history.back();">
+                <img style="padding: 10px; width: 50px; height: 50px" class="basic_icon"
+                     src="/static/assets/cancel_icon.png" alt="취소">
+            </button>
+            <button type="submit">
+                <img style="padding: 10px; width: 50px;" src="/static/assets/complete_icon.png"
+                     alt="삭제">
+            </button>
+        </div>
+    </div>
+</form>
+{% endblock %}

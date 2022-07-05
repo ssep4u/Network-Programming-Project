@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+{% load static %}
+
+{% block extrahead %}
+    <link rel="stylesheet" href="{% static 'css/profile_form.css' %}">
+    <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"
+    />
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <h1 class="text-center">회원정보 변경</h1>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            {% if form.errors %}
+                <div role="alert">
+                    {% for field in form %}
+                        {% if field.errors %}
+                            <strong>{{ field.label }}</strong>
+                            {{ field.errors }}
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            {% endif %}
+
+            <input type="hidden" name="csrfmiddlewaretoken"
+                   value="gZqCdZsuztGYUOU3ANj6CFye4VSda7axElbqnzgSiLjhB35waq7gBIYdmv6krbWd">
+
+
+            <div class="form-group"><label for="id_username">사용자 이름</label>
+                <input type="text" name="username"
+                       value="{{ user_change_form.username.value|default_if_none:'' }}" maxlength="150"
+                       class="form-control"
+                       autocomplete="off"
+                       style="font-weight: bold; color: gray"
+                       placeholder="사용자 이름"
+                       title="150자 이하 문자, 숫자 그리고 @/./+/-/_만 가능합니다."
+                       required="" id="id_username">
+                <small class="form-text text-muted">150자 이하 문자, 숫자 그리고 @/./+/-/_만 가능합니다.</small>
+            </div>
+            <div class="form-group"><label for="id_email">이메일 주소</label>
+                <input type="email" name="email"
+                       value="{{ user_change_form.email.value|default_if_none:'' }}"
+                       maxlength="254"
+                       class="form-control"
+                       autocomplete="off"
+                       placeholder="이메일 주소" title=""
+                       id="id_email"></div>
+            <div class="form-group"><label for="id_nickname">닉네임</label>
+                <input type="text" name="nickname"
+                       value="{{ profile_form.nickname.value|default_if_none:'' }}" maxlength="40"
+                       class="form-control"
+                       placeholder="닉네임"
+                       autocomplete="off"
+                       title="" id="id_nickname">
+            </div>
+            <div class="form-group">
+                <label for="id_description">한줄 소개</label>
+                <textarea name="description" cols="40" rows="10" class="form-control"
+                          placeholder="자신을 표현할 수 있는 한 줄 소개를 적어주세요!" id="id_description">{{ profile_form.description.value}}</textarea>
+            </div>
+            <div class="form-group">
+                <div class="fileBox">
+                    <label for="image" class="btn_file"><img src="{% static 'img/image.png' %}" alt=""/></label>
+                    <input type="text" class="fileName" readonly="readonly">
+                    <input type="file" id="image" value="{{ profile_form.image.url|default_if_none:'' }}" name="image"
+                           accept="image/*" class="uploadBtn">
+                </div>
+            </div>
+            <button type="submit" class="submit">등록</button>
+        </form>
+    </div>
+
+{% endblock %}
+
+{% block script %}
+    <script type="text/javascript">
+        var uploadFile = $('.fileBox .uploadBtn');
+        uploadFile.on('change', function () {
+            if (window.FileReader) {
+                var filename = $(this)[0].files[0].name;
+            } else {
+                var filename = $(this).val().split('/').pop().split('\\').pop();
+            }
+            $(this).siblings('.fileName').val(filename);
+        });
+    </script>
+{% endblock %}

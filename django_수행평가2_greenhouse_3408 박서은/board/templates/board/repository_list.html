@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block title %}그린하우스{% endblock %}
+
+{% block content %}
+    {%  load staticfiles %}
+    {%  load static %}
+    <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic:400,700,800&amp;subset=korean" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{% static 'polls/repository_list.css' %}">
+    <div>
+        <div class="left">
+            <br>
+            <img src="{% static 'img/logo.png' %}" style="width: 300px; ">
+            <br>
+            <br>
+            <br>
+            <table class="type10">
+                <tr>
+                    {% for repository in repository_list %}
+                        <thead>
+                        <th>
+                            <a href="{% url 'board:repository_detail' pk=repository.pk %}" style="color: white";>{{ repository.name }}<br>
+                            </a>
+                        </th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            {% for introduction in repository.introduction_set.all|slice:':3' %}
+                                <tr>
+                                    <td>No.{{ introduction.number }} {{ introduction.title|truncatechars:10 }} ({{introduction.comment_set.all.count}})</td>
+                                    <td><a href="{% url 'board:introduction_detail' repository_pk=repository.pk pk=introduction.pk %}" style="color: green";><i class="bi bi-arrow-right-square "></i></a></td>
+                                </tr>
+                            {% endfor %}
+                    {% endfor %}
+                    </tr>
+                    </tbody>
+            </table>
+        </div>
+        <div class="right">
+        </div>
+    </div>
+{% endblock %}

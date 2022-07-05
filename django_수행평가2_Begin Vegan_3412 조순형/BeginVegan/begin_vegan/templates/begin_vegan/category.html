@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block title %}category{% endblock %}
+
+{% block content %}
+
+{% include 'begin_vegan/header.html' %}
+
+    <nav class="category_container">
+        <ul>
+            <li class="all">
+                <a href="{% url 'begin_vegan:post_list' %}">ALL</a>
+            </li>
+            <li class="vegan">
+                <a href="/post/?category=비건">VEGAN</a>
+            </li>
+            <li class="lacto_ovo">
+                <a href="/post/?category=락토-오보">LACTO-OVO</a>
+            </li>
+            <li class="pesco">
+                <a href="/post/?category=페스코">PESCO</a>
+            </li>
+            <li class="pollo">
+                <a href="/post/?category=폴로">POLLO</a>
+            </li>
+            <li class="flexitarian">
+                <a href="/post/?category=플렉시테리언">FLEXITARIAN</a>
+            </li>
+        </ul>
+    </nav>
+
+<a href="post/?category=VEGAN"></a>
+
+{% endblock %}

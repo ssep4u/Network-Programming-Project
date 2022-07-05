@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}글 목록{% endblock %}
+{% block extrahead %}
+    <link rel="stylesheet" href="{% static 'css/board_list.css' %}">
+    <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"
+    />
+{% endblock %}
+
+{% block content %}
+    <a href="{% url 'daham:board_create' %}" class="btn-lg btn-create"><i class="fas fa-plus"></i>&nbsp;&nbsp;글 등록</a>
+    {% if board_list %}
+        <div class="board-con">
+            {% for board in board_list %}
+                <a href="{% url 'daham:detail' board.id %}">
+                    <div class="board">
+                        {% if board.image %}
+                            <img src="{{ board.image.url }}" class="board-img" alt="">
+                        {% else %}
+                            <img src="{% static 'img/defaultImg.png' %}" class="board-img" alt="">
+                        {% endif %}
+                        <div class="board-info">
+                            <span class="board-title">{{ board.title }}</span>
+                            {% if today == board.end_date %}
+                                <span class="end-date" style="color:red">{{ board.end_date }}</span>
+                            {% else %}
+                                <span class="end-date">{{ board.end_date }}</span>
+                            {% endif %}
+                        </div>
+                        <div class="board-info second">
+                            <span>{{ board.profile.nickname }}</span>
+                            <div class="board-more-info">
+                                <i class="fas fa-comment"></i>&nbsp;{{ board.comment_set.all.count }}&nbsp;&nbsp;
+                                <i class="fas fa-address-book"></i>&nbsp;{{ board.application_set.all.count }}
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            {% endfor %}
+        </div>
+
+        <!-- 페이징처리 시작 -->
+        <ul class="pagination justify-content-center">
+            <!-- 이전페이지 -->
+            {% if board_list.has_previous %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ border_list.previous_page_number }}">이전</a>
+                </li>
+            {% else %}
+                <li class="page-item disabled">
+                    <a class="page-link" tabindex="-1" aria-disabled="true" href="#">이전</a>
+                </li>
+            {% endif %}
+
+            <!-- 페이지리스트 -->
+            {% for page_number in board_list.paginator.page_range %}
+                {% if page_number >= board_list.number|add:-4 and page_number <= board_list.number|add:4 %}
+                    {% if page_number == board_list.number %}
+                        <li class="page-item active page-cur" aria-current="page">
+                            <a class="page-link" href="?page{{ page_number }}">{{ page_number }}</a>
+                        </li>
+                    {% else %}
+                        <li class="page-item page-cur">
+                            <a class="page-link" href="?page={{ page_number }}">{{ page_number }}</a>
+                        </li>
+                    {% endif %}
+                {% endif %}
+            {% endfor %}
+
+            <!-- 다음페이지 -->
+            {% if board_list.has_next %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ board_list.next_page_number }}">다음</a>
+                </li>
+            {% else %}
+                <li class="page-item disabled">
+                    <a class="page-link" tabindex="-1" aria-disabled="true" href="#">다음</a>
+                </li>
+            {% endif %}
+        </ul>
+    {% endif %}
+
+{% endblock %}
